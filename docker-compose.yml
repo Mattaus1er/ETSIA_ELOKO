@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: eloko_postgres
+    environment:
+      POSTGRES_USER: eloko_user
+      POSTGRES_PASSWORD: eloko_password_dev
+      POSTGRES_DB: eloko_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eloko_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - eloko_network
+
+  # MongoDB for Sessions & Cache
+  mongodb:
+    image: mongo:7-alpine
+    container_name: eloko_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: eloko_admin
+      MONGO_INITDB_ROOT_PASSWORD: eloko_password_dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - eloko_network
+
+  # ELOKO Backend API
+  eloko_api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: eloko_api
+    environment:
+      DATABASE_URL: postgresql+asyncpg://eloko_user:eloko_password_dev@postgres:5432/eloko_db
+      MONGODB_URL: mongodb://eloko_admin:eloko_password_dev@mongodb:27017/eloko_sessions
+      SECRET_KEY: your_secret_key_here_change_in_production
+      DEBUG: "false"
+      APP_ENV: development
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - .:/app  # Hot reload in development
+    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    networks:
+      - eloko_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+  # Frontend static site served by Nginx
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: eloko_frontend
+    ports:
+      - "3000:80" # host:container
+    depends_on:
+      - eloko_api
+    networks:
+      - eloko_network
+volumes:
+  postgres_data:
+    driver: local
+  mongodb_data:
+    driver: local
+
+networks:
+  eloko_network:
+    driver: bridge
+
+# Usage:
+# docker-compose up -d          # Start all services
+# docker-compose logs -f        # View logs
+# docker-compose down           # Stop and remove containers
+# docker-compose down -v        # Stop and remove containers AND volumes

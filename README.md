@@ -199,6 +199,51 @@ black app/
 
 Une fois le serveur lancé :
 
+---
+
+## Frontend integration (quick start)
+
+This repository supports two simple deployment options for the frontend:
+
+- Serve the built SPA from the backend `app/static` (simple single-image deploy)
+- Serve the built SPA from a separate Nginx container (recommended for production)
+
+### Build and run frontend locally
+
+1. Build the frontend (from the `frontend/` folder):
+
+```bash
+cd frontend
+npm ci
+npm run build
+```
+
+2a. Option A — Serve from backend (copy build to backend static dir):
+
+```bash
+cp -r frontend/dist/* app/static/
+uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+
+2b. Option B — Run with Docker (Nginx frontend + backend):
+
+```bash
+# Build images and start containers
+docker-compose build
+docker-compose up -d
+# Frontend will be available at http://localhost:3000
+# API at http://localhost:8000
+```
+
+### Environment variable used by frontend
+
+- If the frontend needs to call the API, set `VITE_API_BASE_URL` (Vite) or `REACT_APP_API_URL` (CRA) during build, e.g.:
+
+```bash
+VITE_API_BASE_URL="https://api.your-domain.com" npm run build
+```
+
+
 | URL | Description |
 |-----|-------------|
 | `http://localhost:8000/docs` | Swagger UI (interactif) |

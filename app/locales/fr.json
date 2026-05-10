@@ -1,0 +1,76 @@
+{
+  "auth": {
+    "register_success": "Compte créé avec succès. Vérifiez votre email pour activer votre compte.",
+    "otp_sent": "Un code OTP a été envoyé à votre adresse email.",
+    "otp_invalid": "Code OTP invalide ou expiré. Veuillez réessayer.",
+    "otp_expired": "Ce code OTP a expiré. Un nouveau code a été envoyé.",
+    "login_success": "Connexion réussie.",
+    "invalid_credentials": "Email ou mot de passe incorrect.",
+    "account_inactive": "Votre compte est inactif. Vérifiez votre email.",
+    "account_not_verified": "Veuillez vérifier votre compte via l'email reçu.",
+    "email_already_exists": "Cet email est déjà utilisé.",
+    "weak_password": "Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre.",
+    "logout_success": "Déconnexion réussie.",
+    "token_invalid": "Token invalide ou expiré.",
+    "mfa_required": "Authentification à deux facteurs requise.",
+    "password_reset_sent": "Si cet email existe, un lien de réinitialisation a été envoyé.",
+    "password_reset_success": "Mot de passe réinitialisé avec succès."
+  },
+  "user": {
+    "welcome": "Bienvenue, {name} !",
+    "profile_updated": "Profil mis à jour avec succès.",
+    "profile_not_found": "Utilisateur introuvable.",
+    "account_deleted": "Votre compte a été supprimé et vos données anonymisées (RGPD).",
+    "invalid_phone": "Numéro de téléphone invalide.",
+    "photo_updated": "Photo de profil mise à jour."
+  },
+  "subscription": {
+    "subscribed": "Abonnement {plan} activé avec succès.",
+    "already_subscribed": "Vous avez déjà un abonnement actif.",
+    "cancelled": "Abonnement annulé. Votre accès reste actif jusqu'au {end_date}.",
+    "expired": "Votre abonnement a expiré. Renouvelez pour continuer.",
+    "plan_not_found": "Ce plan d'abonnement n'existe pas.",
+    "invoice_sent": "Facture envoyée à {email}."
+  },
+  "payment": {
+    "success": "Paiement validé avec succès. Reçu envoyé par email.",
+    "failed": "Paiement échoué. Vérifiez votre solde et réessayez.",
+    "timeout": "Délai de paiement dépassé. Veuillez recommencer.",
+    "refunded": "Remboursement de {amount} effectué.",
+    "receipt_generated": "Reçu N°{id} généré et envoyé."
+  },
+  "market": {
+    "data_loading": "Chargement des données du marché...",
+    "api_unavailable": "Le service de données boursières est temporairement indisponible.",
+    "no_data": "Aucune donnée disponible pour cet instrument.",
+    "report_generated": "Rapport hebdomadaire généré avec succès.",
+    "report_sent": "Rapport envoyé à {email}."
+  },
+  "prediction": {
+    "insufficient_data": "Données insuffisantes pour effectuer une prédiction (minimum 7 jours d'historique requis).",
+    "model_error": "Erreur technique du moteur prédictif. Réessayez dans quelques instants.",
+    "prediction_ready": "Analyse prédictive disponible.",
+    "profile_incomplete": "Complétez votre profil pour recevoir des recommandations personnalisées."
+  },
+  "simulation": {
+    "file_too_large": "Le fichier dépasse la taille maximale autorisée (10 Mo).",
+    "file_unreadable": "Impossible de lire ce fichier. Vérifiez qu'il n'est pas corrompu.",
+    "analysis_queued": "Votre document est en cours d'analyse. Vous serez notifié par email.",
+    "report_ready": "Rapport d'analyse disponible.",
+    "insufficient_info": "Informations insuffisantes dans le document pour effectuer une analyse complète."
+  },
+  "notification": {
+    "otp_email_subject": "Votre code de vérification ELOKO",
+    "otp_email_body": "Votre code OTP est : {code}. Il expire dans {minutes} minutes.",
+    "report_email_subject": "Rapport hebdomadaire ELOKO — {date}",
+    "alert_triggered": "Alerte : {instrument} a atteint {price} ({currency})."
+  },
+  "errors": {
+    "internal": "Une erreur interne est survenue. Nos équipes ont été alertées.",
+    "not_found": "Ressource introuvable.",
+    "forbidden": "Vous n'avez pas les droits pour cette action.",
+    "validation": "Données invalides. Vérifiez les champs soumis.",
+    "rate_limit": "Trop de requêtes. Attendez {seconds} secondes avant de réessayer.",
+    "service_unavailable": "Service temporairement indisponible."
+  }
+}

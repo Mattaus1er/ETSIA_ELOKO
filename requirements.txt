@@ -1,0 +1,37 @@
+# Core Framework (Python 3.14+ compatible)
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.6
+python-dotenv>=1.0.1
+
+# Pydantic & Validation (Latest with Python 3.14 support)
+pydantic[email]>=2.11.0
+pydantic-settings>=2.5.0
+
+# Auth & Security (Updated for Python 3.14)
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+pyotp>=2.9.0
+
+# Database (Python 3.14 compatible versions)
+sqlalchemy>=2.0.35
+asyncpg>=0.30.0  # Updated: supports Python 3.14
+alembic>=1.13.2
+
+# HTTP Client
+httpx>=0.27.2
+
+# Email / SMS
+fastapi-mail>=1.4.1
+
+# Internationalization
+babel>=2.15.0
+
+# Payments
+stripe>=10.9.0
+
+# Validation
+phonenumbers>=8.13.45
+
+# Testing
+pytest>=8.3.3
+pytest-asyncio>=0.24.0
